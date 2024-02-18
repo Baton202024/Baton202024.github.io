@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +18,8 @@
       const date = new Date().toISOString();
       const logEntry = `${date} - ${ip}\n`;
 
-      // Send IP address to server-side script for logging
-      fetch('log_visitor.php', {
-        method: 'POST',
-        body: JSON.stringify({ ip, date }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      // Log IP address to console
+      console.log(logEntry);
     });
 </script>
 
