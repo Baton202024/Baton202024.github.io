@@ -1,13 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracking Email</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visitor IP Logging</title>
 </head>
 <body>
-    <h1>Hello!</h1>
-    <p>This is a test email containing an image. When you open this email, your email client may automatically load the image, which could potentially reveal information to the sender.</p>
-    <img src="http://bitiq.ch/tracking_image.jpg" alt="Tracking Image">
+
+<h1>Welcome to the Website</h1>
+<p>This is a simple example of logging visitor IP addresses.</p>
+
+<script>
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      const ip = data.ip;
+      const date = new Date().toISOString();
+      const logEntry = `${date} - ${ip}\n`;
+
+      // Send IP address to server-side script for logging
+      fetch('log_visitor.php', {
+        method: 'POST',
+        body: JSON.stringify({ ip, date }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    });
+</script>
+
 </body>
 </html>
