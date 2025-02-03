@@ -1,102 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-        body {
-            background-color: #0B1416;
-            color: #F0F0F0;
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-
-        #location-info-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        #location-info {
-            background-color: #12232E;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 60%;
-        }
-
-        #ip-address-container {
-            background-color: #12232E;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 35%;
-        }
-
-        h2 {
-            color: #FFD700;
-            font-size: 24px;
-            margin-top: 0;
-        }
-
-        p {
-            margin: 10px 0;
-            line-height: 1.6;
-        }
-
-        .ip-address {
-            color: #ff0000;
-            font-size: 24px;
-            margin-top: 0;
-        }
-
-    </style>
-    <meta charset="UTF-8">
-    <title id="title">IP: Loading...</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('https://api.ipgeolocation.io/ipgeo?apiKey=a456f960d0024a69b93db88779390c03') 
-                .then(response => response.json())
-                .then(data => {
-                    document.title = "IP: " + data.ip;
-                    document.getElementById("title").textContent = "IP: " + data.ip;
-                    document.getElementById("location-info").innerHTML =
-                        '<h2>Location Information</h2>' +
-                        '<p><strong>Country:</strong> ' + data.country_name + '</p>' +
-                        '<p><strong>State:</strong> ' + data.state_prov + '</p>' +
-                        '<p><strong>City:</strong> ' + data.city + '</p>' +
-                        '<p><strong>District:</strong> ' + data.district + '</p>' +
-                        '<p><strong>Latitude:</strong> ' + data.latitude + '</p>' +
-                        '<p><strong>Longitude:</strong> ' + data.longitude + '</p>';
-                    document.getElementById("ip-address").textContent = data.ip;
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tasbih Fatima Deluxe</title>
+  <!-- Elegant fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f2f2f2;
+      --text-color: #333;
+      --accent-color: #9b59b6;
+      --container-bg: #fff;
+    }
+    body.dark {
+      --bg-color: #222;
+      --text-color: #ddd;
+      --accent-color: #8e44ad;
+      --container-bg: #333;
+    }
+    /* Reset & Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Roboto', sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background: var(--container-bg);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header nav a {
+      margin-right: 1rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .header-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .toggle-btn, .info-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: var(--accent-color);
+      color: #fff;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+    }
+    .toggle-btn:hover, .info-btn:hover {
+      background: #8e44ad;
+    }
+    .container {
+      max-width: 600px;
+      margin: 80px auto 2rem;
+      padding: 1rem;
+    }
+    section {
+      background: var(--container-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+    #phrase {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+      animation: fadeIn 0.5s ease;
+    }
+    #counter {
+      font-size: 4rem;
+      margin: 1rem 0;
+      color: var(--accent-color);
+    }
+    .btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: var(--accent-color);
+      color: #fff;
+      margin: 0.5rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #8e44ad;
+      transform: translateY(-3px);
+    }
+    .pulse {
+      animation: pulse 0.5s ease;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+    .modal-content {
+      background: var(--container-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+    /* Confetti Container */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 150;
+    }
+    /* Mobile Adjustments */
+    @media (max-width: 480px) {
+      header nav a {
+        font-size: 1.2rem;
+      }
+      .toggle-btn, .info-btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+      }
+      .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+      }
+      #counter {
+        font-size: 3.5rem;
+      }
+      #phrase {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-    <div id="location-info-container">
-        <div id="location-info">
-            <h2>Location Information</h2>
-            <p>Loading location information...</p>
-        </div>
-        <div id="ip-address-container">
-            <h2>IP Address</h2>
-            <p><span class="ip-address" id="ip-address">Loading IP address...</span></p>
-        </div>
+  <header>
+    <nav>
+      <a href="#counterSection">Counter</a>
+    </nav>
+    <div class="header-controls">
+      <button class="toggle-btn" id="soundToggle">Sound: On</button>
+      <button class="toggle-btn" id="darkModeToggle">Dark Mode: Off</button>
+      <button class="toggle-btn" id="fullscreenToggle">Fullscreen</button>
+      <button class="info-btn" id="openModal">&#9432;</button>
     </div>
-
+  </header>
+  
+  <div class="container">
+    <section id="counterSection">
+      <h2>Tasbih Fatima</h2>
+      <div id="phrase">Subhanallah</div>
+      <div id="counter">0</div>
+      <button class="btn" id="increment">Count</button>
+      <button class="btn" id="reset">Reset</button>
+    </section>
+  </div>
+  
+  <!-- Modal for Information -->
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h2>About Tasbih Fatima</h2>
+      <p>
+        Tasbih Fatima is a traditional practice of reflection and gratitude. This digital counter helps you track your recitations:
+        Subhanallah (33), Alhamdulillah (33), Allahu Akbar (34).
+      </p>
+    </div>
+  </div>
+  
+  <!-- Confetti Container -->
+  <div class="confetti" id="confettiContainer"></div>
+  
+  <script>
+    // --- Confetti Animation ---
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confettiContainer');
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        confetti.style.top = '-10px';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.opacity = Math.random();
+        confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+        confetti.style.animation = 'fall 3s linear forwards';
+        confettiContainer.appendChild(confetti);
+        confetti.addEventListener('animationend', () => { confetti.remove(); });
+      }
+    }
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+      @keyframes fall {
+        to {
+          transform: translateY(${window.innerHeight + 50}px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+    
+    // --- Counter Logic ---
+    const phrases = [
+      { text: "Subhanallah", max: 33 },
+      { text: "Alhamdulillah", max: 33 },
+      { text: "Allahu Akbar", max: 34 }
+    ];
+    let currentPhrase = 0, count = 0, soundOn = true;
+    const phraseEl = document.getElementById('phrase');
+    const counterEl = document.getElementById('counter');
+    const incrementBtn = document.getElementById('increment');
+    const resetBtn = document.getElementById('reset');
+    const soundToggle = document.getElementById('soundToggle');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const fullscreenToggle = document.getElementById('fullscreenToggle');
+    
+    function updateDisplay() {
+      phraseEl.textContent = phrases[currentPhrase].text;
+      counterEl.textContent = count;
+      counterEl.classList.remove('pulse');
+      void counterEl.offsetWidth; // trigger reflow for pulse
+      counterEl.classList.add('pulse');
+    }
+    
+    // --- Sound Effect (Web Audio API) ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep() {
+      if (!soundOn) return;
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.frequency.value = 440;
+      oscillator.type = 'sine';
+      oscillator.start();
+      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1);
+      oscillator.stop(audioCtx.currentTime + 0.1);
+    }
+    
+    // --- Vibration for Mobile ---
+    function vibratePhone() {
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+    }
+    
+    incrementBtn.addEventListener('click', () => {
+      playBeep();
+      vibratePhone();
+      count++;
+      if (count > phrases[currentPhrase].max) {
+        currentPhrase++;
+        count = 1;
+        if (currentPhrase >= phrases.length) {
+          createConfetti();
+          alert('Tasbih Fatima Completed!');
+          currentPhrase = 0;
+          count = 0;
+        }
+      }
+      updateDisplay();
+    });
+    
+    resetBtn.addEventListener('click', () => {
+      currentPhrase = 0;
+      count = 0;
+      updateDisplay();
+    });
+    
+    updateDisplay();
+    
+    // --- Toggle Sound ---
+    soundToggle.addEventListener('click', () => {
+      soundOn = !soundOn;
+      soundToggle.textContent = soundOn ? 'Sound: On' : 'Sound: Off';
+    });
+    
+    // --- Toggle Dark Mode ---
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      darkModeToggle.textContent = document.body.classList.contains('dark') ? 'Dark Mode: On' : 'Dark Mode: Off';
+    });
+    
+    // --- Fullscreen Toggle ---
+    fullscreenToggle.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullscreenToggle.textContent = 'Exit Fullscreen';
+      } else {
+        document.exitFullscreen();
+        fullscreenToggle.textContent = 'Fullscreen';
+      }
+    });
+    
+    // --- Modal Logic ---
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const infoModal = document.getElementById('infoModal');
+    
+    openModalBtn.addEventListener('click', () => {
+      infoModal.style.display = 'flex';
+    });
+    closeModalBtn.addEventListener('click', () => {
+      infoModal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target == infoModal) {
+        infoModal.style.display = 'none';
+      }
+    });
+  </script>
 </body>
-
 </html>
